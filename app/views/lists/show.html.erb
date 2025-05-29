@@ -1,15 +1,63 @@
-<h2><%= @list.name %></h2>
-<h3>Movies of the list</h3>
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li><%= bookmark.movie.title %> - <%= bookmark.comment %> <%= link_to "Delete",
-    bookmark_path(bookmark),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %></li>
-  <% end %>
-</ul>
-<%= link_to "Back to lists", lists_path %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <%= link_to "#", class: "navbar-brand" do %>
+      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+    <% end %>
 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <%# if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "Home", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Messages", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item dropdown">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Action", "#", class: "dropdown-item" %>
+              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Log out", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
+              <%# link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+            </div>
+          </li>
+        <%# else %>
+          <!--li class="nav-item"-->
+            <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <!--/li-->
+        <%# end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="card-category bigger-cards" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://wallpapers.com/images/hd/black-and-white-movie-1920-x-1080-wallpaper-gpk3p4hldjuli7v1.jpg)">
+  <%= @list.name %>
+</div>
+<div class="button-right">
+    <%= link_to "Back to lists", lists_path, class: "btn btn-gradient" %>
+</div>
+<h3 class="padding-ltb">Movies in this list</h3>
+
+<div id="movie-cards" class="cards">
+  <% @bookmarks.each do |bookmark| %>
+    <div class="card-product">
+      <img src=<%= bookmark.movie.poster_url %> />
+      <div class="card-product-infos">
+        <h2><%= bookmark.movie.title %></h2>
+        <p><%= bookmark.comment %></p>
+        <div class="align-right">
+          <%= link_to(bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}) do%>
+            <i class="fa-solid fa-trash-can cinema-red"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <h4>Add new movie</h4>
 <%= simple_form_for [@list, @bookmark] do |f| %>
   <%= f.input :comment %>

@@ -1,0 +1,41 @@
+.btn-ghost {
+  color: #4A4A4A;
+  border: 1px solid #4A4A4A;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.btn-ghost:hover {
+  opacity: 1;
+}
+
+.btn-flat {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: rgb(143, 23, 23);
+  transition: background 0.3s ease;
+}
+
+.btn-flat:hover {
+  background: rgb(102, 13, 13);
+  color: white;
+}
+
+.btn-gradient {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  background: linear-gradient( rgb(143, 23, 23), rgb(121, 15, 15));
+  transition: background 0.3s ease;
+  border: 1px solid rgb(143, 23, 23);
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(rgb(102, 13, 13), rgb(73, 7, 7));
+  color: white;
+}
