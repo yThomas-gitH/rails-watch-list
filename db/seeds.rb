@@ -13,7 +13,21 @@
 # Movie.create(title: "Ocean's Eight", overview: "Debbie Ocean, a criminal mastermind, gathers a crew of female thieves to pull off the heist of the century.", poster_url: "https://image.tmdb.org/t/p/original/MvYpKlpFukTivnlBhizGbkAe3v.jpg", rating: 7.0)
 
 # List.create(name: "First List")
-puts Bookmark.all
-Bookmark.all.each do |movie|
-    puts "#{movie.movie.title} - #{movie.comment}"
+# puts Bookmark.all
+# Bookmark.all.each do |movie|
+#     puts "#{movie.movie.title} - #{movie.comment}"
+# end
+require "json"
+require "open-uri"
+url = "https://tmdb.lewagon.com/movie/top_rated"
+serialized = URI.parse(url).read
+movies = JSON.parse(serialized)
+Review.delete_all
+List.delete_all
+Movie.delete_all
+Review.delete_all
+
+movies["results"].each do |movie|
+  puts "Creating movie #{movie["title"]} with https://image.tmdb.org/t/p/original#{movie["poster_path"]}"
+  Movie.create(title: movie["title"], overview: movie["overview"], poster_url: "https://image.tmdb.org/t/p/original#{movie["poster_path"]}", rating: movie["vote_average"])
 end

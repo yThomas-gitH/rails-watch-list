@@ -38,13 +38,18 @@
   All your movies, in one place!
 </div>
 <div class="beige-background">
-  <div class="button-right">
+  <div class="button-right marg20">
     <%= link_to "New list", new_list_path, class: "btn btn-gradient" %>
   </div>
   <h3 class="padding-ltb">My Lists</h3>
   <div class="cards">
     <% @lists.each do |list| %>
-      <div class="smaller-cards card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://plus.unsplash.com/premium_photo-1682125795272-4b81d19ea386?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmlsbSUyMHJvbGx8ZW58MHx8MHx8fDA%3D)">
+      <div class="smaller-cards card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(
+      <% if list.photo.attached? %>
+        <%= cl_image_path list.photo.key %>
+      <% else %>
+        <%= "https://wallpapers.com/images/hd/black-and-white-movie-1920-x-1080-wallpaper-gpk3p4hldjuli7v1.jpg" %>
+      <% end %>)">
       <%= link_to list.name, list_path(list), class: "white-link" %>
       </div>
     <% end %>

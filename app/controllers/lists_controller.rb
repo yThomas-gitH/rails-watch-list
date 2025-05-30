@@ -20,11 +20,13 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @bookmarks = @list.bookmarks
     @bookmark = Bookmark.new
+    @reviews = @list.reviews
+    @review = Review.new
   end
 
   private
 
   def strong_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :photo)
   end
 end

@@ -1,0 +1,8 @@
+<div class="form-container">
+  <h4>Reviews</h4>
+  <%= simple_form_for [@list, @review] do |f| %>
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.submit class: "btn btn-gradient" %>
+  <% end %>
+</div>

@@ -34,10 +34,15 @@
     </div>
   </div>
 </div>
-<div class="card-category bigger-cards" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://wallpapers.com/images/hd/black-and-white-movie-1920-x-1080-wallpaper-gpk3p4hldjuli7v1.jpg)">
+<div class="card-category bigger-cards" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(
+  <% if @list.photo.attached? %>
+    <%= cl_image_path @list.photo.key %>
+  <% else %>
+    <%= "https://wallpapers.com/images/hd/black-and-white-movie-1920-x-1080-wallpaper-gpk3p4hldjuli7v1.jpg" %>
+  <% end %>)">
   <%= @list.name %>
 </div>
-<div class="button-right">
+<div class="button-right marg20">
     <%= link_to "Back to lists", lists_path, class: "btn btn-gradient" %>
 </div>
 <h3 class="padding-ltb">Movies in this list</h3>
@@ -63,6 +68,35 @@
   <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.association :movie, as: :select %>
     <%= f.input :comment %>
+    <%= f.submit class: "btn btn-gradient" %>
+  <% end %>
+</div>
+
+<div class="comments-container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="page-header">
+        <h3><small class="pull-right"></small> Comments </h3>
+      </div> 
+      <div class="comments-list">
+        <% @reviews.each do |review| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading user_name"><%= review.title %></h4>
+            <%= review.content %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+        
+<div class="form-container">
+  <h4>Add comment</h4>
+  <%= simple_form_for [@list, @review] do |f| %>
+    <%= f.input :title %>
+    <%= f.input :content %>
     <%= f.submit class: "btn btn-gradient" %>
   <% end %>
 </div>

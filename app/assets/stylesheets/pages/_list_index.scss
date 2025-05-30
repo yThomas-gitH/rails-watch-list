@@ -5,6 +5,7 @@
 
 .smaller-cards {
   height: 100px;
+  border-radius: 5px;
 }
 
 .bigger-cards {
@@ -13,12 +14,16 @@
 
 .button-right {
   float: right;
+}
+
+.marg20 {
   margin: 20px;
 }
 
 .white-link {
   text-decoration: none;
   color: white;
+  font-size: 0.6em;
 }
 
 .padding-ltb {
